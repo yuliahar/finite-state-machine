@@ -58,10 +58,8 @@ class FSM {
      * Resets FSM state to initial.
      */
     reset() {
-        this._movesIndex = 0;
-        this._moves = [];
-        this._moves.push(this._state);
         this._state = this._config.initial;
+        this.clearHistory();
     }
 
     /**
@@ -129,7 +127,9 @@ class FSM {
      * Clears transition history
      */
     clearHistory() {
-        this.reset();
+        this._movesIndex = 0;
+        this._moves = [];
+        this._moves.push(this._state);
     }
 
     logStateInHistory(state) {
