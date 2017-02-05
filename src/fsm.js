@@ -8,12 +8,8 @@ class FSM {
             throw new Error("Config is failed.");
         }
         this._config = config;
-        this._state = this._config.initial;
         this._states = this._config.states;
-        this._movesIndex = 0;
-        this._moves = [];
-        this._moves.push(this._state);
-        this._isAvailableRedo = false;
+        this.reset();
     }
 
     /**
@@ -46,12 +42,7 @@ class FSM {
         var transitions = this._states[this._state].transitions;
         var newState = transitions[event];
 
-        if (!newState) {
-            throw new Error("Event does not exist.")
-        } else {
-            this._state = newState;
-            this.logStateInHistory(newState);
-        }
+        this.changeState(newState);
     }
 
     /**
@@ -59,6 +50,7 @@ class FSM {
      */
     reset() {
         this._state = this._config.initial;
+        this._isAvailableRedo = false;
         this.clearHistory();
     }
 
