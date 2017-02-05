@@ -90,8 +90,9 @@ class FSM {
          if (!this._movesIndex) {
              return false;
          }
-         this._state = this._moves[this._movesIndex - 1];
+
          this._movesIndex--;
+         this._state = this._moves[this._movesIndex];
          this._isAvailableRedo = true;
 
          return true;
@@ -109,8 +110,9 @@ class FSM {
             return false;
         }
 
-        this._state = this._moves[this._movesIndex + 1];
         this._movesIndex++;
+        this._state = this._moves[this._movesIndex];
+
 
         return true;
     }
